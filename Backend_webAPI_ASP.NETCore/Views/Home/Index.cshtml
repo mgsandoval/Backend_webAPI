@@ -10,7 +10,37 @@
         <label class="form-label" for="customFile">Busque o suelte un archivo de Excel</label>
         <!-- Acepta libros de Excel, libros con macros, libros binarios y libros de Excel 97-2003: -->
         <input type="file" class="form-control" id="customFile" accept=".xlsx, .xlsm, .xlsb, .xls" />
-        <input class="btn btn-primary btn-lg" type="submit" value="Subir archivo de Excel" asp-controller="Index" asp-action="ExcelFileReader">
+        <input class="btn btn-primary btn-lg" type="submit" asp-controller="Home" asp-action="ExcelFileReader" value="Subir archivo de Excel" />
         <!-- <input type="submit" asp-controller="Home" class="btn-submit" value="Subir archivo de Excel" /> -->
+    </div>
+
+    .<div class="table-container">
+        <table class="table">
+            <thead>
+                <tr>
+                    @if (ViewBag.ExcelData != null && ViewBag.ExcelData.Count > 0)
+                    {
+                        @foreach (var item in ViewBag.ExcelData[0])
+                        {
+                            <th>@item</th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @if (ViewBag.ExcelData != null && ViewBag.ExcelData.Count > 1)
+                {
+                    @for (int i = 1; i < ViewBag.ExcelData.Count; i++)
+                    {
+                        <tr>
+                            @foreach (var cell in ViewBag.ExcelData[i])
+                            {
+                                <td>@cell</td>
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </div>
 </div>
