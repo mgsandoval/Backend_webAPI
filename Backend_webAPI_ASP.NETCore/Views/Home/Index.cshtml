@@ -1,16 +1,13 @@
-﻿@page
-@model IndexModel
-@{
-    ViewData["Title"] = "Inicio";
+﻿@{
+    ViewData["Title"] = "Home Page";
 }
-
 
 <div class="text-center">
     <h1 class="display-4">Bienvenido</h1>
     <!-- <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> -->
 
     <div class="file-reader">
-        <label class="form-label" for="customFile">Busque o suelte un archivo de Excel!</label>
+        <label class="form-label" for="customFile">Busque o suelte un archivo de Excel</label>
         <!-- Acepta libros de Excel, libros con macros, libros binarios y libros de Excel 97-2003: -->
         <input type="file" class="form-control" id="customFile" accept=".xlsx, .xlsm, .xlsb, .xls" />
         <input class="btn btn-primary btn-lg" type="submit" value="Subir archivo de Excel" asp-controller="Index" asp-action="ExcelFileReader">

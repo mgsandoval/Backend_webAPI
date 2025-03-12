@@ -1,22 +1,16 @@
-using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Backend_webAPI_ASP.NETCore.Models;
 
-namespace Backend_webAPI.Pages;
+namespace Backend_webAPI_ASP.NETCore.Controllers;
 
-public class IndexModel : PageModel
+public class HomeController : Controller
 {
-    private readonly ILogger<IndexModel> _logger;
+    private readonly ILogger<HomeController> _logger;
 
-    public IndexModel(ILogger<IndexModel> logger)
+    public HomeController(ILogger<HomeController> logger)
     {
         _logger = logger;
-    }
-
-    public void OnGet()
-    {
-
     }
 
     public IActionResult Index()
@@ -29,33 +23,27 @@ public class IndexModel : PageModel
         return View();
     }
 
-    private IActionResult View()
-    {
-        throw new NotImplementedException();
-    }
-
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-
     public IActionResult Error()
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
-    [HttpPost]
-    public async Task<IActionResult> ExcelDataReader(IFormFile file)
+    public IActionResult ExcelFileReader()
     {
-        if (file != null || file.Length > 0)
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> ExcelFileReader(IFormFile file)
+    {
+        if (file == null || file.Length <= 0)
         {
             var uploadDirectory = $"{Directory.GetCurrentDirectory()}\\wwwroot\\uploads";
 
             if (!Directory.Exists(uploadDirectory))
             {
                 Directory.CreateDirectory(uploadDirectory);
-            }
-            var filePath = Path.Combine(uploadDirectory, file.FileName);
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
             }
         }
         return View();
