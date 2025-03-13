@@ -28,12 +28,9 @@ body {
 }
 
 .form-label,
-.form-control,
-.btn {
+.form-control {
     margin: auto auto 20px auto;
 }
 
-/*.btn-primary:hover {
-    cursor: pointer;
-}*/
+
 

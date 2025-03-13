@@ -1,46 +1,66 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Subida de archivos";
 }
 
 <div class="text-center">
     <h1 class="display-4">Bienvenido</h1>
-    <!-- <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> -->
 
     <div class="file-reader">
-        <label class="form-label" for="customFile">Busque o suelte un archivo de Excel</label>
         <!-- Acepta libros de Excel, libros con macros, libros binarios y libros de Excel 97-2003: -->
-        <input type="file" class="form-control" id="customFile" accept=".xlsx, .xlsm, .xlsb, .xls" />
-        <input class="btn btn-primary btn-lg" type="submit" asp-controller="Home" asp-action="ExcelFileReader" value="Subir archivo de Excel" />
-        <!-- <input type="submit" asp-controller="Home" class="btn-submit" value="Subir archivo de Excel" /> -->
+        <label class="form-label" for="customFile">Busque o suelte un archivo de Excel</label>
+        <input type="file" class="form-control" id="inputExcel" accept=".xlsx, .xlsm, .xlsb, .xls" />
+
+        <button class="btn btn-warning" onclick="mostrarDatos()">Mostrar datos de Excel</button>
     </div>
 
-    .<div class="table-container">
-        <table class="table">
-            <thead>
-                <tr>
-                    @if (ViewBag.ExcelData != null && ViewBag.ExcelData.Count > 0)
-                    {
-                        @foreach (var item in ViewBag.ExcelData[0])
-                        {
-                            <th>@item</th>
-                        }
-                    }
-                </tr>
-            </thead>
-            <tbody>
-                @if (ViewBag.ExcelData != null && ViewBag.ExcelData.Count > 1)
-                {
-                    @for (int i = 1; i < ViewBag.ExcelData.Count; i++)
-                    {
-                        <tr>
-                            @foreach (var cell in ViewBag.ExcelData[i])
-                            {
-                                <td>@cell</td>
-                            }
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-sm-12">
+            <table id="tbData" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Telefono</th>
+                        <th>Correo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        function mostrarDatos(){
+            const input = document.getElementById("inputExcel")
+
+            const formData = new FormData()
+
+            formData.append("ArchivoExcel",input.files[0])
+
+            fetch("Home/MostrarDatos",{
+                method: "POST",
+                body:formData
+            })
+            .then((response) => { return response.json()})
+            .then((dataJson) => {
+
+                dataJson.forEach((item) => {
+                    $("#tbData tbody").append(
+                        $("<tr>").append(
+                            $("<td>").text(item.nombre),
+                            $("<td>").text(item.apellido),
+                            $("<td>").text(item.telefono),
+                            $("<td>").text(item.correo)
+                        )
+
+                    )
+                })
+
+            })
+        }
+    </script>
+
+}
