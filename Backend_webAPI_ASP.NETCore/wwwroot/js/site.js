@@ -1,4 +1,30 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿function mostrarDatos() {
+    const input = document.getElementById("inputExcel")
 
-// Write your JavaScript code.
+    const formData = new FormData()
+
+    formData.append("ArchivoExcel", input.files[0])
+
+    fetch("Home/MostrarDatos", {
+        method: "POST",
+        body: formData
+    })
+        .then((response) => { return response.json() })
+        .then((dataJson) => {
+
+            dataJson.forEach((item) => {
+                $("#tbData tbody").append(
+                    $("<tr>").append(
+                        $("<td>").text(item.nombre),
+                        $("<td>").text(item.apellido),
+                        $("<td>").text(item.telefono),
+                        $("<td>").text(item.correo)
+                    )
+                )
+            })
+        })
+}
+
+function enviarDatos() {
+    
+}

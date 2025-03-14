@@ -7,10 +7,22 @@
 
     <div class="file-reader">
         <!-- Acepta libros de Excel, libros con macros, libros binarios y libros de Excel 97-2003: -->
-        <label class="form-label" for="customFile">Busque o suelte un archivo de Excel</label>
+        <label class="form-label" for="inputExcel">Busque o suelte un archivo de Excel</label>
         <input type="file" class="form-control" id="inputExcel" accept=".xlsx, .xlsm, .xlsb, .xls" />
 
-        <button class="btn btn-warning" onclick="mostrarDatos()">Mostrar datos de Excel</button>
+        <button class="btn btn-warning" onclick="mostrarDatos()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+                <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+            </svg>
+            Mostrar datos
+        </button>
+        <button class="btn btn-primary" onclick="enviarDatos()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
+            </svg>
+            Enviar datos
+        </button>
     </div>
 
     <div class="row">
@@ -18,10 +30,38 @@
             <table id="tbData" class="table table-striped">
                 <thead>
                     <tr>
+                        <th>Código</th>
+                        <th>Nombre-Razon Social</th>
+                        <th>Tipo de cliente</th>
+                        <th>Moneda</th>
+                        @* Pestaña general *@
+                        <th>Telefono 1</th>
+                        <th>Telefono móvil</th>
+                        <th>Correo electrónico</th>
+                        <th>RTN</th>
+                        <th>Dirección</th>
+                        <th>Vendedor</th>
+                        <th>Territorio</th>
+                        @* Pestaña personas de contacto *@
+                        <th>Nombre completo</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Telefono</th>
-                        <th>Correo</th>
+                        <th>Teléfono fijo</th>
+                        <th>Móvil personal</th>
+                        <th>Correo electrónico</th>
+                        @* Pestaña direcciones *@
+                        <th>Destino</th>
+                        <th>ID de dirección</th>
+                        <th>Nombre de dirección 2</th>
+                        <th>Nombre de dirección 3</th>
+                        <th>Ciudad</th>
+                        <th>Condado</th>
+                        @* Pestaña condiciones de pago *@
+                        <th>Condiciones de pago</th>
+                        <th>Lista de precios</th>
+                        <th>Límite de crédito</th>
+                        @* Pestaña finanzas *@
+                        <th>Cuenta mayor (sucursal)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,35 +72,5 @@
 </div>
 
 @section Scripts {
-    <script>
-        function mostrarDatos(){
-            const input = document.getElementById("inputExcel")
-
-            const formData = new FormData()
-
-            formData.append("ArchivoExcel",input.files[0])
-
-            fetch("Home/MostrarDatos",{
-                method: "POST",
-                body:formData
-            })
-            .then((response) => { return response.json()})
-            .then((dataJson) => {
-
-                dataJson.forEach((item) => {
-                    $("#tbData tbody").append(
-                        $("<tr>").append(
-                            $("<td>").text(item.nombre),
-                            $("<td>").text(item.apellido),
-                            $("<td>").text(item.telefono),
-                            $("<td>").text(item.correo)
-                        )
-
-                    )
-                })
-
-            })
-        }
-    </script>
-
+    <script src="./js/site.js"></script>
 }

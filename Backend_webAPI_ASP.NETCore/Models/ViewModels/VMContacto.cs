@@ -1,6 +1,6 @@
 ﻿namespace Backend_webAPI_ASP.NETCore.Models.ViewModels
 {
-    public class VMParametros
+    public class VMContacto
     {
         public string nombre { get; set; }
         public string apellido { get; set; }
