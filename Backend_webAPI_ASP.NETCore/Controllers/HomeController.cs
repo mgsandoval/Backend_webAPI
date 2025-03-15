@@ -50,16 +50,16 @@ namespace Backend_webAPI_ASP.NETCore.Controllers
                 IRow fila = HojaExcel.GetRow(i);
                 lista.Add(new VMContacto
                 {
-                    Codigo                  = fila.GetCell(0).ToString(),
-                    Nombre_razon_social     = fila.GetCell(1).ToString(),
-                    Tipo_cliente            = fila.GetCell(2).ToString(),
-                    Moneda                  = fila.GetCell(3).ToString(),
-                    Telefono1               = fila.GetCell(4).ToString(),
-                    Telefono_movil          = fila.GetCell(5).ToString(),
-                    Correo_electronico      = fila.GetCell(6).ToString(),
-                    RTN                     = fila.GetCell(7).ToString(),
-                    Direccion               = fila.GetCell(8).ToString(),
-                    Vendedor                = fila.GetCell(9).ToString(),
+                    Codigo                  = fila.GetCell(0) .ToString(),
+                    Nombre_razon_social     = fila.GetCell(1) .ToString(),
+                    Tipo_cliente            = fila.GetCell(2) .ToString(),
+                    Moneda                  = fila.GetCell(3) .ToString(),
+                    Telefono1               = fila.GetCell(4) .ToString(),
+                    Telefono_movil          = fila.GetCell(5) .ToString(),
+                    Correo_electronico      = fila.GetCell(6) .ToString(),
+                    RTN                     = fila.GetCell(7) .ToString(),
+                    Direccion               = fila.GetCell(8) .ToString(),
+                    Vendedor                = fila.GetCell(9) .ToString(),
                     Territorio              = fila.GetCell(10).ToString(),
                     Nombre_completo         = fila.GetCell(11).ToString(),
                     Nombre                  = fila.GetCell(12).ToString(),
@@ -77,7 +77,6 @@ namespace Backend_webAPI_ASP.NETCore.Controllers
                     Lista_precios           = fila.GetCell(24).ToString(),
                     Limite_credito          = fila.GetCell(25).ToString(),
                     Cuenta_mayor_sucursal   = fila.GetCell(26).ToString()
-
                 });
             }
 

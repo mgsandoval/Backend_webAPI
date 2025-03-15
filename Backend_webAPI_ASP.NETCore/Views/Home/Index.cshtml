@@ -10,7 +10,7 @@
         <label class="form-label" for="inputExcel">Busque o suelte un archivo de Excel</label>
         <input type="file" class="form-control" id="inputExcel" accept=".xlsx, .xlsm, .xlsb, .xls" />
 
-        <button class="btn btn-warning" onclick="mostrarDatos()">
+        <button class="btn btn-warning" onclick="mostrarDatos(); limpiarInput(); ">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
                 <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
                 <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
@@ -34,7 +34,6 @@
                         <th>Nombre-Razon Social</th>
                         <th>Tipo de cliente</th>
                         <th>Moneda</th>
-                        @* Pestaña general *@
                         <th>Telefono 1</th>
                         <th>Telefono móvil</th>
                         <th>Correo electrónico</th>
@@ -42,25 +41,21 @@
                         <th>Dirección</th>
                         <th>Vendedor</th>
                         <th>Territorio</th>
-                        @* Pestaña personas de contacto *@
                         <th>Nombre completo</th>
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>Teléfono fijo</th>
                         <th>Móvil personal</th>
                         <th>Correo electrónico</th>
-                        @* Pestaña direcciones *@
                         <th>Destino</th>
                         <th>ID de dirección</th>
                         <th>Nombre de dirección 2</th>
                         <th>Nombre de dirección 3</th>
                         <th>Ciudad</th>
                         <th>Condado</th>
-                        @* Pestaña condiciones de pago *@
                         <th>Condiciones de pago</th>
                         <th>Lista de precios</th>
                         <th>Límite de crédito</th>
-                        @* Pestaña finanzas *@
                         <th>Cuenta mayor (sucursal)</th>
                     </tr>
                 </thead>

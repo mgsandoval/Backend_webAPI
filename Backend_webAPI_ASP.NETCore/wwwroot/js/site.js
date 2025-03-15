@@ -1,9 +1,11 @@
 ﻿function mostrarDatos() {
-    const input = document.getElementById("inputExcel")
+    let input = document.getElementById("inputExcel");
+    let newInput = input.cloneNode(true);
 
-    const formData = new FormData()
 
-    formData.append("ArchivoExcel", input.files[0])
+    const formData = new FormData();
+
+    formData.append("ArchivoExcel", input.files[0]);
 
     fetch("Home/MostrarDatos", {
         method: "POST",
@@ -43,11 +45,12 @@
                         $("<td>").text(item.limite_credito),
                         $("<td>").text(item.cuenta_mayor_sucursal)
                     )
-                )
-            })
-        })
+                );
+            });
+        });
+    input = document.getElementById("inputExcel").value = "";
 }
 
 function enviarDatos() {
-    
+
 }
