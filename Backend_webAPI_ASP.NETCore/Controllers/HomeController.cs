@@ -7,7 +7,7 @@ using NPOI.HSSF.UserModel;
 using Microsoft.EntityFrameworkCore;
 using Backend_webAPI_ASP.NETCore.Models.ViewModels;
 using SAPbobsCOM;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+//using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Backend_webAPI_ASP.NETCore.Controllers
 {
@@ -30,6 +30,7 @@ namespace Backend_webAPI_ASP.NETCore.Controllers
             return View();
         }
 
+        // Método para mostrar los datos del archivo Excel, recibe un archivo de tipo IFormFile y devuelve una lista de tipo VMContacto
         [HttpPost]
         public IActionResult MostrarDatos([FromForm] IFormFile ArchivoExcel)
         {
@@ -90,7 +91,8 @@ namespace Backend_webAPI_ASP.NETCore.Controllers
             return StatusCode(StatusCodes.Status200OK, lista);
         }
 
-
+        // Método para enviar los datos del archivo Excel a SAP B1, recibe un archivo de tipo IFormFile y devuelve un mensaje de tipo string
+        // Los mensajes se imprimen en la consola de la aplicación web
         [HttpPost]
         public IActionResult EnviarDatos([FromForm] IFormFile ArchivoExcel)
         {
@@ -170,33 +172,31 @@ namespace Backend_webAPI_ASP.NETCore.Controllers
                 else
                 {
                     Console.WriteLine("Conectado a SAP B1 exitosamente");
-                    // aquí deben ir las operaciones desde DI
-                    // por ejemplo, creación de clientes, facturas...
-                    mySN = (SAPbobsCOM.BusinessPartners)myCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oBusinessPartners); // Se crea una instancia de la clase BusinessPartners de la DI API
-                    mySN.CardCode = "C0001"; // Código del cliente
-                    mySN.CardName = "Cliente creado desde DI API 01"; // Nombre del cliente
-                    mySN.AdditionalID = "CF"; // Tipo de identificación adicional
-                    mySN.FederalTaxID = "000000000000"; // Identificación fiscal
-                    mySN.Phone1 = "2255"; // Teléfono
+                    myCompany.Disconnect();
+                    Console.WriteLine("Desconectado de SAP B1");
+
+
+                    //foreach (var contacto in lista)
+                    //{
+                    //    mySN = (SAPbobsCOM.BusinessPartners)myCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oBusinessPartners); // Se crea una instancia de la clase BusinessPartners de la DI API
+                    //    mySN = (SAPbobsCOM.BusinessPartners)myCompany.GetBusinessObject(SAPbobsCOM.BoObjectTypes.oBusinessPartners); // Se crea una instancia de la clase BusinessPartners de la DI API
+                    //    mySN.CardCode = contacto.Codigo; // Código del cliente
+                    //    mySN.CardName = contacto.Nombre_razon_social; // Nombre del cliente
+                    //    mySN.AdditionalID = contacto.Tipo_cliente; // Tipo de identificación adicional
+                    //    mySN.FederalTaxID = contacto.RTN; // Identificación fiscal
+                    //    mySN.Phone1 = contacto.Telefono1; // Teléfono
 
                     // Se intenta agregar el cliente a la base de datos
-                    err = mySN.Add();
-
-                    if (err != 0)
-                    {
-                        Console.WriteLine("Error al crear el cliente: " + myCompany.GetLastErrorDescription(), "Error");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Cliente creado exitosamente");
-                    }
-
-
-                    if (myCompany.Connected == true)
-                    {
-                        myCompany.Disconnect();
-                        Console.WriteLine("SAP B1 ha sido desconectado");
-                    }
+                    //    err = mySN.Add();
+                    //    if (err != 0)
+                    //    {
+                    //        Console.WriteLine("Error al crear el cliente: " + myCompany.GetLastErrorDescription(), "Error");
+                    //    }
+                    //    else
+                    //    {
+                    //        Console.WriteLine("Cliente creado exitosamente");
+                    //    }
+                    //}
                 }
             }
             catch (Exception ex)
@@ -213,6 +213,7 @@ namespace Backend_webAPI_ASP.NETCore.Controllers
         {
             return View();
         }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
