@@ -1,7 +1,5 @@
 ﻿function mostrarDatos() {
     let input = document.getElementById("inputExcel");
-    let newInput = input.cloneNode(true);
-
 
     const formData = new FormData();
 
@@ -49,8 +47,4 @@
             });
         });
     input = document.getElementById("inputExcel").value = "";
-}
-
-function enviarDatos() {
-
 }

@@ -4,7 +4,7 @@ namespace Backend_webAPI_ASP.NETCore.Models;
 
 public class Contacto
 {
-    public int Codigo { get; set; }
+    public string Codigo { get; set; }
     public string? Nombre_razon_social { get; set; }
     public string? Tipo_cliente { get; set; }
     public string? Moneda { get; set; }
@@ -29,7 +29,7 @@ public class Contacto
     public string? Condado { get; set; }
     public string? Condiciones_pago { get; set; }
     public string? Lista_precios { get; set; }
-    public decimal? Limite_credito { get; set; }
-    public int? Cuenta_mayor_sucursal { get; set; }
+    public string? Limite_credito { get; set; }
+    public string? Cuenta_mayor_sucursal { get; set; }
 
 }
