@@ -1,10 +1,18 @@
 ﻿function enviarDatos() {
-    //Obtener los datos de la tabla
-    alert("Hola mundo!!!!!!!!!!");
+    // Obtenemos el archivo Excel
+    let input = document.getElementById("inputExcel");
+    // Obtenemos la tabla
     let table = document.getElementById("tbData");
+    // Creamos un arreglo para almacenar los datos
     let data = [];
+
+    console.log("Enviando datos...");
+
+    // Recorremos la tabla y almacenamos los datos en el arreglo
     for (let i = 1; i < table.rows.length; i++) {
+        // Obtenemos la fila
         let row = table.rows[i];
+        // Obtenemos los datos de la fila
         let rowData = {
             codigo: row.cells[0].innerText,
             nombre_razon_social: row.cells[1].innerText,
@@ -36,17 +44,21 @@
         };
         data.push(rowData);
     }
-    alert("Los datos han sido enviados");
 
-    //fetch("Home/EnviarDatos", {
-    //    method: "POST",
-    //    headers: {
-    //        "Content-Type": "application/json"
-    //    },
-    //    body: JSON.stringify(data)
-    //})
-    //    .then((response) => { return response.json() })
-    //    .then((dataJson) => {
-    //        console.log(dataJson);
-    //    });
+    fetch("Home/EnviarDatos", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    })
+        .then((response) => { return response.json() })
+        .then((dataJson) => {
+            console.log(dataJson);
+        })
+        .catch((error) => {
+            console.error("Error al enviar los datos: ", error);
+        });
+
+    //input = document.getElementById("inputExcel").value = "";
 }

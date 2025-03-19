@@ -1,10 +1,18 @@
 ﻿function mostrarDatos() {
+    // Obtenemos el archivo excel
     let input = document.getElementById("inputExcel");
 
+    // Creamos un objeto FormData
     const formData = new FormData();
 
+    // Agregamos el archivo excel al objeto FormData
     formData.append("ArchivoExcel", input.files[0]);
 
+    console.log("Mostrando datos...");
+
+    /* Realizamos la petición POST al servidor con el archivo excel, llamando al método MostrarDatos 
+     * del controlador Home.
+    */
     fetch("Home/MostrarDatos", {
         method: "POST",
         body: formData
@@ -46,5 +54,5 @@
                 );
             });
         });
-    input = document.getElementById("inputExcel").value = "";
+    console.log("Datos mostrados.");
 }
