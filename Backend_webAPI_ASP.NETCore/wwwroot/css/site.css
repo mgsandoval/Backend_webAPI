@@ -29,7 +29,7 @@ body {
     padding: 50px 50px 50px 50px;
     border: 2px solid gray;
     border-radius: 25px;
-    min-width: 300px;
+/*    min-width: 300px;*/
 }
 
 .form-label,
@@ -47,7 +47,7 @@ th {
 
 .btn {
     margin: auto 0.5em;
-    min-width: 100px;
+/*    min-width: 100px;*/
 }
 
 h1 {

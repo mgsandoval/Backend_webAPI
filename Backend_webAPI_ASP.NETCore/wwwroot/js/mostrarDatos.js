@@ -19,7 +19,6 @@
     })
         .then((response) => { return response.json() })
         .then((dataJson) => {
-
             dataJson.forEach((item) => {
                 $("#tbData tbody").append(
                     $("<tr>").append(

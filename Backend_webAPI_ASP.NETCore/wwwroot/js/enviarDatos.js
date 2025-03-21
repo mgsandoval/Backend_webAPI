@@ -1,12 +1,10 @@
 ﻿function enviarDatos() {
-    // Obtenemos el archivo Excel
-    let input = document.getElementById("inputExcel");
     // Obtenemos la tabla
     let table = document.getElementById("tbData");
     // Creamos un arreglo para almacenar los datos
     let data = [];
 
-    console.log("Enviando datos...");
+    console.log("Preparando datos para enviar...");
 
     // Recorremos la tabla y almacenamos los datos en el arreglo
     for (let i = 1; i < table.rows.length; i++) {
@@ -14,36 +12,20 @@
         let row = table.rows[i];
         // Obtenemos los datos de la fila
         let rowData = {
-            codigo: row.cells[0].innerText,
-            nombre_razon_social: row.cells[1].innerText,
-            tipo_cliente: row.cells[2].innerText,
-            moneda: row.cells[3].innerText,
-            telefono1: row.cells[4].innerText,
-            telefono_movil: row.cells[5].innerText,
-            correo_electronico: row.cells[6].innerText,
-            rtn: row.cells[7].innerText,
-            direccion: row.cells[8].innerText,
-            vendedor: row.cells[9].innerText,
-            territorio: row.cells[10].innerText,
-            nombre_completo: row.cells[11].innerText,
-            nombre: row.cells[12].innerText,
-            apellido: row.cells[13].innerText,
-            telefono_fijo: row.cells[14].innerText,
-            movil_personal: row.cells[15].innerText,
-            correo_electronico2: row.cells[16].innerText,
-            destino: row.cells[17].innerText,
-            id_direccion: row.cells[18].innerText,
-            nombre_direccion2: row.cells[19].innerText,
-            nombre_direccion3: row.cells[20].innerText,
-            ciudad: row.cells[21].innerText,
-            condado: row.cells[22].innerText,
-            condiciones_pago: row.cells[23].innerText,
-            lista_precios: row.cells[24].innerText,
-            limite_credito: row.cells[25].innerText,
-            cuenta_mayor_sucursal: row.cells[26].innerText
+            Codigo: row.cells[0].innerText.trim(),
+            Nombre_razon_social: row.cells[1].innerText.trim(),
+            Tipo_cliente: row.cells[2].innerText.trim(),
+            Moneda: row.cells[3].innerText.trim(),
+            Telefono1: row.cells[4].innerText.trim(),
+            Telefono_movil: row.cells[5].innerText.trim(),
+            Correo_electronico: row.cells[6].innerText.trim(),
+            RTN: row.cells[7].innerText.trim(),
+            Direccion: row.cells[8].innerText.trim(),
+            Vendedor: row.cells[9].innerText.trim(),
+            Territorio: row.cells[10].innerText.trim()
         };
         data.push(rowData);
-    }
+    };
 
     fetch("Home/EnviarDatos", {
         method: "POST",
@@ -52,13 +34,27 @@
         },
         body: JSON.stringify(data)
     })
-        .then((response) => { return response.json() })
-        .then((dataJson) => {
-            console.log(dataJson);
+        // Response 1: Obtenemos la respuesta del servidor y la mostramos en la consola
+        .then(response => {
+            if (!response.ok) {
+                console.log("[Response 1.]");
+                throw new Error("Error en la API: " + response.statusText);
+            }
+            return response.json();
         })
-        .catch((error) => {
-            console.error("Error al enviar los datos: ", error);
+        // Response 2: Obtenemos la respuesta del servidor y la mostramos en la consola
+        .then(responseJson => {
+            alert(responseJson.message);
+            console.log("Respuesta del servidor:", responseJson);
+            console.log("[Response 2.]");
+        })
+        // Catch: Mostramos un mensaje de error en la consola
+        .catch(error => {
+            console.log("Error al enviar los datos:", error);
+            console.log("[Catch.]");
+            alert("Ocurrió un error al enviar los datos. Revisa la consola.");
         });
 
     //input = document.getElementById("inputExcel").value = "";
 }
+
